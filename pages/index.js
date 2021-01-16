@@ -1,65 +1,37 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import Layout from "../components/Layout";
+import authContext from "../context/auth/authContext";
+import React,{useContext,useEffect} from 'react'
+import Link from 'next/link'
 
 export default function Home() {
+    //Extrar el usuario autenticado del storage
+    const AuthContext = useContext(authContext)
+    const { usuarioAutenticado } = AuthContext
+    useEffect(() => {
+        usuarioAutenticado()
+    }, []);
+
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <Layout>
+      <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
+            <div className="lg:flex md:shadow-lg p-5 bg-white rounded-lg py-10">
+                <div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0">
+                    <p>Dropzone aquí</p>
+                </div>
+                <div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0">
+                    <h2 className="text-4xl font-sans font-bold text-gray-800 my-4">Compartir archivos de forma sencilla y privada</h2>
+                    <p className="text-lg leading-loose my-2">
+                        <span className="text-red-500 font-bold">ReactNodeSend</span> te permite compartir archivos con cifrado de extremo a extremo y un archivo que es eliminado después de ser descargado. Así que puedes mantener lo que compartes en privado y asegurarte de que tus  cosas no esten en línea para siempre.
+                    </p>
+                    <Link href="/register" className="pt-4 ">
+                        <a className="bg-red-500 rounded-lg text-white px-3 py-2 text-bold text-lg hover:bg-red-700">Iniciar para más beneficios</a>
+                    </Link>
+                </div>
+            </div>
+      </div>
+    </Layout>
   )
 }
